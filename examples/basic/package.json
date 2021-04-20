@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "postinstall": "rm -rf node_modules/react-native-video/{examples,node_modules}",
+    "postinstall": "rm -rf node_modules/@chatterbug/react-native-video/{examples,node_modules}",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -12,7 +12,7 @@
     "react": "^16.12.0",
     "react-native": "0.61.5",
     "react-native-windows": "^0.61.0-0",
-    "react-native-video": "file:../.."
+    "@chatterbug/react-native-video": "file:../.."
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

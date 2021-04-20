@@ -40,7 +40,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shared", "..\node_modules\r
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mso", "..\node_modules\react-native-windows\Mso\Mso.vcxitems", "{84E05BFA-CBAF-4F0D-BFB6-4CE85742A57E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactNativeVideoCPP61", "..\node_modules\react-native-video\windows\ReactNativeVideoCPP61\ReactNativeVideoCPP61.vcxproj", "{765365E4-9553-4900-9F69-E26D4309C8DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ReactNativeVideoCPP61", "..\node_modules\@chatterbug\react-native-video\windows\ReactNativeVideoCPP61\ReactNativeVideoCPP61.vcxproj", "{765365E4-9553-4900-9F69-E26D4309C8DA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

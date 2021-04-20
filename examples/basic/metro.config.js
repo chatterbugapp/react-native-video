@@ -37,11 +37,11 @@ module.exports = {
       ),
       // Prevent recursive node_modules from local react-native-video
       new RegExp(
-        `${path.resolve(__dirname, 'node_modules/react-native-video/node_modules').replace(/[/\\]/g, '/')}.*`,
+        `${path.resolve(__dirname, 'node_modules/@chatterbug/react-native-video/node_modules').replace(/[/\\]/g, '/')}.*`,
       ),
       // Prevent recursive examples from local react-native-video
       new RegExp(
-        `${path.resolve(__dirname, 'node_modules/react-native-video/examples').replace(/[/\\]/g, '/')}.*`,
+        `${path.resolve(__dirname, 'node_modules/@chatterbug/react-native-video/examples').replace(/[/\\]/g, '/')}.*`,
       ),
     ]),
   },

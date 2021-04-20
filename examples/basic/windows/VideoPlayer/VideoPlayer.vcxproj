@@ -150,7 +150,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\node_modules\react-native-video\windows\ReactNativeVideoCPP61\ReactNativeVideoCPP61.vcxproj">
+    <ProjectReference Include="..\..\node_modules\@chatterbug\react-native-video\windows\ReactNativeVideoCPP61\ReactNativeVideoCPP61.vcxproj">
       <Project>{765365e4-9553-4900-9f69-e26d4309c8da}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\node_modules\react-native-windows\Microsoft.ReactNative\Microsoft.ReactNative.vcxproj">
