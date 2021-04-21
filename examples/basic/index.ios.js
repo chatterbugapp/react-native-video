@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 
-import Video,{FilterType} from 'react-native-video';
+import Video,{FilterType} from '@chatterbug/react-native-video';
 
 const filterTypes = [
     FilterType.NONE,
