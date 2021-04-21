@@ -928,12 +928,15 @@ static int const RCTVideoUnset = -1;
 {
   if (paused) {
     [_player pause];
-    [_player setRate:0.0];
+    [_player setRate:0.0]; 
+   
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:FALSE error:nil];
   } else {
     AVAudioSession *session = [AVAudioSession sharedInstance];
     AVAudioSessionCategory category = nil;
     AVAudioSessionCategoryOptions options = nil;
-
+    
     if([_ignoreSilentSwitch isEqualToString:@"ignore"]) {
       category = AVAudioSessionCategoryPlayback;
     } else if([_ignoreSilentSwitch isEqualToString:@"obey"]) {
@@ -962,7 +965,7 @@ static int const RCTVideoUnset = -1;
     }
     [_player setRate:_rate];
   }
-  
+
   _paused = paused;
 }
 
