@@ -139,6 +139,7 @@ export interface VideoProperties extends ViewProps {
     ignoreSilentSwitch?: 'ignore' | 'obey';
     reportBandwidth?: boolean;
     disableFocus?: boolean;
+    disableBuffering?: boolean;
     controls?: boolean;
     currentTime?: number;
     progressUpdateInterval?: number;
