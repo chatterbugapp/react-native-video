@@ -116,6 +116,7 @@ class VideoPlayer extends Component {
             onLoad={this.onLoad}
             onProgress={this.onProgress}
             onEnd={this.onEnd}
+            onPlaybackRateChange={(d) => console.log(`Rate changed! ${d.playbackRate}`)}
             onAudioBecomingNoisy={this.onAudioBecomingNoisy}
             onAudioFocusChanged={this.onAudioFocusChanged}
             repeat={false}
