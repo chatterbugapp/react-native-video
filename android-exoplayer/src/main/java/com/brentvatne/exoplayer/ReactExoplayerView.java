@@ -653,6 +653,8 @@ class ReactExoplayerView extends FrameLayout implements
         if (!disableFocus) {
             setKeepScreenOn(preventsDisplaySleepDuringVideoPlayback);
         }
+
+        eventEmitter.playbackRateChange(rate);
     }
 
     private void pausePlayback() {
@@ -662,6 +664,7 @@ class ReactExoplayerView extends FrameLayout implements
             }
         }
         setKeepScreenOn(false);
+        eventEmitter.playbackRateChange(0);
     }
 
     private void stopPlayback() {
@@ -674,6 +677,7 @@ class ReactExoplayerView extends FrameLayout implements
             setFullscreen(false);
         }
         audioManager.abandonAudioFocus(this);
+        eventEmitter.playbackRateChange(0);
     }
 
     private void updateResumePosition() {
@@ -794,7 +798,7 @@ class ReactExoplayerView extends FrameLayout implements
                 break;
             case Player.STATE_ENDED:
                 text += "ended";
-                eventEmitter.end();
+                //eventEmitter.end();
                 onStopPlayback();
                 setKeepScreenOn(false);
                 break;
