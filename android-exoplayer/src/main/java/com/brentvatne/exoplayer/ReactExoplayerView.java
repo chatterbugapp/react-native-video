@@ -30,7 +30,7 @@ import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
-import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
@@ -84,7 +84,7 @@ import java.util.Map;
 @SuppressLint("ViewConstructor")
 class ReactExoplayerView extends FrameLayout implements
         LifecycleEventListener,
-        Player.EventListener,
+        Player.Listener,
         BandwidthMeter.EventListener,
         BecomingNoisyListener,
         AudioManager.OnAudioFocusChangeListener,
@@ -106,7 +106,7 @@ class ReactExoplayerView extends FrameLayout implements
     private final DefaultBandwidthMeter bandwidthMeter;
     private PlayerControlView playerControlView;
     private View playPauseControlContainer;
-    private Player.EventListener eventListener;
+    private Player.Listener eventListener;
 
     private ExoPlayerView exoPlayerView;
 
@@ -172,7 +172,7 @@ class ReactExoplayerView extends FrameLayout implements
             switch (msg.what) {
                 case SHOW_PROGRESS:
                     if (player != null
-                            && player.getPlaybackState() == Player.STATE_READY
+                            && player.getPlaybackState() == ExoPlayer.STATE_READY
                             && player.getPlayWhenReady()
                             ) {
                         long pos = player.getCurrentPosition();
@@ -351,7 +351,7 @@ class ReactExoplayerView extends FrameLayout implements
         });
 
         // Invoking onPlayerStateChanged event for Player
-        eventListener = new Player.EventListener() {
+        eventListener = new Player.Listener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                 reLayout(playPauseControlContainer);
@@ -633,12 +633,12 @@ class ReactExoplayerView extends FrameLayout implements
     private void startPlayback() {
         if (player != null) {
             switch (player.getPlaybackState()) {
-                case Player.STATE_IDLE:
-                case Player.STATE_ENDED:
+                case ExoPlayer.STATE_IDLE:
+                case ExoPlayer.STATE_ENDED:
                     initializePlayer();
                     break;
-                case Player.STATE_BUFFERING:
-                case Player.STATE_READY:
+                case ExoPlayer.STATE_BUFFERING:
+                case ExoPlayer.STATE_READY:
                     if (!player.getPlayWhenReady()) {
                         setPlayWhenReady(true);
                     }
@@ -770,7 +770,7 @@ class ReactExoplayerView extends FrameLayout implements
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         String text = "onStateChanged: playWhenReady=" + playWhenReady + ", playbackState=";
         switch (playbackState) {
-            case Player.STATE_IDLE:
+            case ExoPlayer.STATE_IDLE:
                 text += "idle";
                 eventEmitter.idle();
                 clearProgressMessageHandler();
@@ -778,13 +778,13 @@ class ReactExoplayerView extends FrameLayout implements
                     setKeepScreenOn(false);
                 }
                 break;
-            case Player.STATE_BUFFERING:
+            case ExoPlayer.STATE_BUFFERING:
                 text += "buffering";
                 onBuffering(true);
                 clearProgressMessageHandler();
                 setKeepScreenOn(preventsDisplaySleepDuringVideoPlayback);
                 break;
-            case Player.STATE_READY:
+            case ExoPlayer.STATE_READY:
                 text += "ready";
                 eventEmitter.ready();
                 onBuffering(false);
@@ -796,7 +796,7 @@ class ReactExoplayerView extends FrameLayout implements
                 }
                 setKeepScreenOn(preventsDisplaySleepDuringVideoPlayback);
                 break;
-            case Player.STATE_ENDED:
+            case ExoPlayer.STATE_ENDED:
                 text += "ended";
                 //eventEmitter.end();
                 onStopPlayback();
@@ -933,8 +933,8 @@ class ReactExoplayerView extends FrameLayout implements
         }
         // When repeat is turned on, reaching the end of the video will not cause a state change
         // so we need to explicitly detect it.
-        if (reason == Player.DISCONTINUITY_REASON_PERIOD_TRANSITION
-                && player.getRepeatMode() == Player.REPEAT_MODE_ONE) {
+        if (reason == ExoPlayer.DISCONTINUITY_REASON_AUTO_TRANSITION
+                && player.getRepeatMode() == ExoPlayer.REPEAT_MODE_ONE) {
             eventEmitter.end();
         }
     }
@@ -1107,9 +1107,9 @@ class ReactExoplayerView extends FrameLayout implements
     public void setRepeatModifier(boolean repeat) {
         if (player != null) {
             if (repeat) {
-                player.setRepeatMode(Player.REPEAT_MODE_ONE);
+                player.setRepeatMode(ExoPlayer.REPEAT_MODE_ONE);
             } else {
-                player.setRepeatMode(Player.REPEAT_MODE_OFF);
+                player.setRepeatMode(ExoPlayer.REPEAT_MODE_OFF);
             }
         }
         this.repeat = repeat;
