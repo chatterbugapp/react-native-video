@@ -84,6 +84,14 @@ public final class ExoPlayerView extends FrameLayout {
         addViewInLayout(layout, 0, aspectRatioParams);
     }
 
+    private void clearVideoView() {
+        if (surfaceView instanceof TextureView) {
+            player.clearVideoTextureView((TextureView) surfaceView);
+        } else if (surfaceView instanceof SurfaceView) {
+            player.clearVideoSurfaceView((SurfaceView) surfaceView);
+        }
+    }
+
     private void setVideoView() {
         if (surfaceView instanceof TextureView) {
             player.setVideoTextureView((TextureView) surfaceView);
